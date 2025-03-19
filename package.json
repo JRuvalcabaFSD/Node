@@ -1,0 +1,9 @@
+{
+  "name": "02-node",
+  "version": "0.0.1",
+  "description": "Desarrollando en node",
+  "main": "app.js",
+  "repository": "https://github.com/JRuvalcabaFSD/Node.git",
+  "author": "Jesus Ruvalcaba <jruvalcabafsd@gmail.com>",
+  "license": "MIT"
+}
