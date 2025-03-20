@@ -1,9 +1,20 @@
 {
-  "name": "02-node",
-  "version": "0.0.1",
-  "description": "Desarrollando en node",
-  "main": "app.js",
+  "name": "03-node-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
   "repository": "https://github.com/JRuvalcabaFSD/Node.git",
   "author": "Jesus Ruvalcaba <jruvalcabafsd@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "CHOKIDAR_USEPOLLING=true nodemon",
+    "build": "rimraf ./dist && tsc",
+    "start": "yarn build && node dist/app.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "nodemon": "^3.1.9",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
 }
