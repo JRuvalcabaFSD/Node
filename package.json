@@ -7,6 +7,10 @@
   "author": "Jesus Ruvalcaba <jruvalcabafsd@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "dev":"nodemon src/app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
