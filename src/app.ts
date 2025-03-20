@@ -1,5 +1,5 @@
-import { findHeroById } from './services/hero.service';
+import { buildLogger } from './plugins';
 
-const hero = findHeroById(1);
-
-console.log(hero?.name ?? 'Hero not found');
+const logger = buildLogger('app.ts');
+logger.log('Hola mundo');
+logger.error('Esto es algo malo');
