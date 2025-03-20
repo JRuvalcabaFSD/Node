@@ -1,5 +1,7 @@
-const { v4: uuidv4 } = require("uuid")
-const getAge = require("get-age")
+
+const { getAge } = require("../plugins/getAge.plugin")
+const { getUuid } = require("../plugins/uuid.plugin")
+
 
 const makeBuildPerson = () => {
   return ()=>{}
@@ -8,7 +10,7 @@ const makeBuildPerson = () => {
 
 const buildPerson = ({ name,birdthDate}) => {
   return {
-    id: uuidv4(),
+    id: getUuid(),
     name,
     birdthDate,
     age:getAge(birdthDate)
