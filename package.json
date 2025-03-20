@@ -5,5 +5,8 @@
   "main": "app.js",
   "repository": "https://github.com/JRuvalcabaFSD/Node.git",
   "author": "Jesus Ruvalcaba <jruvalcabafsd@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/app.js"
+  }
 }
