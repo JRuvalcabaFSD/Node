@@ -194,6 +194,8 @@ const config: Config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+  watchPathIgnorePatterns: ['node_modules'], // Ignora cambios en node_modules
+  watchman: false, // Desactiva watchman para evitar problemas en WSL
 };
 
 export default config;
