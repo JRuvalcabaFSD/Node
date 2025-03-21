@@ -8,7 +8,7 @@ interface PersonProps {
   birdthDate: string;
 }
 
-const buildMakePerson = ({ getAge, getUuid }: BuildMakePersonProps) => {
+export const buildMakePerson = ({ getAge, getUuid }: BuildMakePersonProps) => {
   return ({ name, birdthDate }: PersonProps) => {
     return {
       id: getUuid(),
@@ -18,5 +18,3 @@ const buildMakePerson = ({ getAge, getUuid }: BuildMakePersonProps) => {
     };
   };
 };
-
-module.exports = { buildMakePerson };
