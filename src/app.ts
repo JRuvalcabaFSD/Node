@@ -1,18 +1,9 @@
-import boxen from 'boxen';
-import path from 'path';
-import { mkdirSync, writeFileSync } from 'fs';
+import { yarg } from './config/plugins/yargs.plugin';
 
-let ouputMessage = '';
-const base = 5;
-const headerMessage = boxen(`Tabla del ${base}`, { padding: 1, width: 180, borderColor: 'green', textAlignment: 'center' });
-const ouputDir = path.join(__dirname, '../ouputs');
+(async () => {
+  main();
+})();
 
-for (let i = 1; i <= 10; i++) {
-  ouputMessage += `${base} x ${i} = ${base * i}\n`;
+async function main() {
+  console.log('Main ejecutado');
 }
-
-ouputMessage = `${headerMessage}\n${ouputMessage}`;
-
-mkdirSync(ouputDir, { recursive: true });
-writeFileSync(`${ouputDir}/tabla-${base}.txt`, ouputMessage);
-console.log(ouputMessage);

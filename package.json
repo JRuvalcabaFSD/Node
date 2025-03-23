@@ -7,13 +7,14 @@
   "author": "Jesus Ruvalcaba <jruvalcabafsd@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "npx ts-node ./src/app.ts",
+    "dev": "npx ts-node ./src/app.ts -b 10",
     "dev:nodemon": "WSLENV=CHOKIDAR_USEPOLLING=1 nodemon --legacy-watch",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/app.js"
   },
   "devDependencies": {
     "@types/node": "^22.13.11",
+    "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^8.27.0",
     "@typescript-eslint/parser": "^8.27.0",
     "eslint": "^9.23.0",
@@ -27,6 +28,7 @@
   },
   "dependencies": {
     "boxen": "^8.0.1",
-    "chalk": "^5.4.1"
+    "chalk": "^5.4.1",
+    "yargs": "^17.7.2"
   }
 }
