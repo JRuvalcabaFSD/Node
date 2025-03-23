@@ -5,7 +5,6 @@ describe('CreateTable', () => {
     const createTable = new CreateTable();
     const table = createTable.execute({ base: 2 });
     const rows = table.split('\n');
-    console.log(rows.length);
 
     expect(createTable).toBeInstanceOf(CreateTable);
     expect(table).toContain('2 x 1 = 2');
