@@ -1,4 +1,5 @@
 import { mkdirSync, writeFileSync } from 'fs';
+import path from 'path';
 
 export interface SaveFileUseCase {
   execute: (options: Options) => boolean;
@@ -13,9 +14,11 @@ export interface Options {
 export class SaveFile implements SaveFileUseCase {
   constructor() {}
   execute({ fileDestination = 'ouputs', fileName = 'table', fileContet }: Options): boolean {
+    const filePath = path.join(__dirname, '..', '..', '..', fileDestination);
+
     try {
-      mkdirSync(fileDestination, { recursive: true });
-      writeFileSync(`${fileDestination}/${fileName}.txt`, fileContet);
+      mkdirSync(filePath, { recursive: true });
+      writeFileSync(`${filePath}/${fileName}.txt`, fileContet);
       return true;
     } catch (error) {
       console.log(error);
