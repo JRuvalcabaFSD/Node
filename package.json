@@ -7,7 +7,8 @@
   "author": "Jesus Ruvalcaba <jruvalcabafsd@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "WSLENV=CHOKIDAR_USEPOLLING=1 nodemon --legacy-watch",
+    "dev": "npx ts-node ./src/app.ts",
+    "dev:nodemon": "WSLENV=CHOKIDAR_USEPOLLING=1 nodemon --legacy-watch",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/app.js"
   },
@@ -23,5 +24,9 @@
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "boxen": "^8.0.1",
+    "chalk": "^5.4.1"
   }
 }
