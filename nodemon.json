@@ -1,0 +1,9 @@
+{
+  "watch": ["src"],
+  "ext": ".ts,.js,.json",
+  "ignore": [],
+  "exec": "npx ts-node ./src/app.ts",
+  "delay": "2500",    
+  "legacy-watch": true,
+  "polling-interval": 1000
+}
