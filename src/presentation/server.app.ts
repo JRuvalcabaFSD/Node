@@ -16,7 +16,7 @@ export class ServerApp {
     const table = new CreateTable().execute({ base, limit });
     const wasCreate = new SaveFile().execute({ fileContet: table, fileName: `${fileName} ${base}`, fileDestination });
 
-    wasCreate ? console.log('File created!') : console.log('File not created!');
+    wasCreate ? console.log('File created!') : console.error('File not created!');
     showTable && console.log(table);
   }
 }
