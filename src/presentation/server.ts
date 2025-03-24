@@ -8,7 +8,7 @@ const fyleSystemRepository = new LogRepositoryImpl(new FileSystemDatasource());
 export class Server {
   public static start() {
     console.log('Sever started...');
-    const url = 'https://localhost:3000';
+    const url = 'http://localhost:3000';
     CronService.createJob('*/5 * * * * *', () => {
       new CheckService(fyleSystemRepository, undefined, undefined).execute(url);
     });
