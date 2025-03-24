@@ -10,7 +10,7 @@ export class Server {
     console.log('Sever started...');
     const url = 'https://localhost:3000';
     CronService.createJob('*/5 * * * * *', () => {
-      new CheckService(fyleSystemRepository, () => console.log(`${url} is ok`), console.log).execute(url);
+      new CheckService(fyleSystemRepository, undefined, undefined).execute(url);
     });
   }
 }
