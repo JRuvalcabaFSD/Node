@@ -15,8 +15,6 @@ interface Attachment {
   path: string;
 }
 
-//TODO Attachement
-
 export class EmailService {
   private transporter = createTransport({
     host: envs.MAILER_SERVICE,
@@ -31,19 +29,14 @@ export class EmailService {
     },
   });
 
-  constructor(private readonly logRepository: LogRepository) {}
+  constructor() {}
 
   async sendEmail(options: SendMailOptions): Promise<boolean> {
     const { to, subject, htmlBody, attachments = [] } = options;
     try {
       const sendInformation = await this.transporter.sendMail({ to, subject, html: htmlBody, attachments });
-      const log = new LogEntity({ level: LogseverityLevel.low, message: `Email send`, origin: 'email.service.ts' });
-      this.logRepository.saveLog(log);
-
       return true;
     } catch (error) {
-      const log = new LogEntity({ level: LogseverityLevel.hight, message: `Email was not send`, origin: 'email.service.ts' });
-      this.logRepository.saveLog(log);
       return false;
     }
   }
@@ -61,6 +54,6 @@ export class EmailService {
       { fileName: 'logs-medium.log', path: 'logs/logs-medium.log' },
     ];
 
-    this.sendEmail({ to, subject, attachments, htmlBody });
+    return this.sendEmail({ to, subject, attachments, htmlBody });
   }
 }
