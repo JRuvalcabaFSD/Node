@@ -6,3 +6,4 @@ ouputs/
 coverage/
 logs/
 *.env
+mongo/
