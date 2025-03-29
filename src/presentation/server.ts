@@ -26,7 +26,7 @@ export class Server {
     //   const url = 'https://google.com';
     //   new CheckService(logRepository, undefined, undefined).execute(url);
     // });
-    const logs = await logRepository.getLog(LogseverityLevel.medium);
+    const logs = await logRepository.getLog(LogseverityLevel.low);
     console.log(logs);
   }
 }
