@@ -1,23 +1,30 @@
+import { LogseverityLevel } from '../domain/entities/log.entities';
 import { CheckService } from '../domain/use-cases/checks/check.service';
 import { SendEmailLogs } from '../domain/use-cases/email/send.email.log';
 import { FileSystemDatasource } from '../infrastructure/datasources/file-system.datasource';
+import { MongoLogdataSource } from '../infrastructure/datasources/mongo,datasource';
 import { LogRepositoryImpl } from '../infrastructure/repositories/log-repository.impl';
 import { CronService } from './cron/cron-service';
 import { EmailService } from './email/email.service';
 
-const fyleSystemRepository = new LogRepositoryImpl(new FileSystemDatasource());
-const emailService = new EmailService();
+const logRepository = new LogRepositoryImpl(
+  new FileSystemDatasource(),
+  // new MongoLogdataSource()
+);
+// const emailService = new EmailService();
 
 export class Server {
-  public static start() {
+  public static async start() {
     console.log('Sever started...');
 
     // new SendEmailLogs(emailService, fyleSystemRepository).execute(['jruvalcabafsd@proton.me', 'jruvalcbafsd@icloud.com']);
     // const emailService = new EmailService(fyleSystemRepository);
     // emailService.sendEmailWithFileSystemLogs(['jruvalcabafsd@proton.me', 'jruvalcbafsd@icloud.com']);
-    // const url = 'http://localhost:3000';
     // CronService.createJob('*/5 * * * * *', () => {
-    //   new CheckService(fyleSystemRepository, undefined, undefined).execute(url);
+    //   const url = 'https://godddogle.com';
+    //   new CheckService(logRepository, undefined, undefined).execute(url);
     // });
+    const logs = await logRepository.getLog(LogseverityLevel.low);
+    console.log(logs);
   }
 }

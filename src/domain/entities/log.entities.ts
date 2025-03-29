@@ -32,4 +32,9 @@ export class LogEntity {
 
     return log;
   };
+
+  static fromMongo = (object: { [key: string]: any }): LogEntity => {
+    const { message, level, createAt, origin } = object;
+    return new LogEntity({ message, level, createAt, origin });
+  };
 }
