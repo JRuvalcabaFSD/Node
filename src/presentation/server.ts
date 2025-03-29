@@ -21,10 +21,10 @@ export class Server {
     // const emailService = new EmailService(fyleSystemRepository);
     // emailService.sendEmailWithFileSystemLogs(['jruvalcabafsd@proton.me', 'jruvalcbafsd@icloud.com']);
     // CronService.createJob('*/5 * * * * *', () => {
-    //   const url = 'https://godddogle.com';
+    //   const url = 'https://google.com';
     //   new CheckService(logRepository, undefined, undefined).execute(url);
     // });
-    const logs = await logRepository.getLog(LogseverityLevel.low);
+    const logs = await logRepository.getLog(LogseverityLevel.medium);
     console.log(logs);
   }
 }
