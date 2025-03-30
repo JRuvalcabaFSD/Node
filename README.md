@@ -20,6 +20,11 @@ PROD=false
 yarn install
 ```
 
+4. Regenera la base de datos
+```
+npx prisma migrate dev
+```
+
 4. Ejecutar el comando para iniciar el modo dsarrollo
 ```
 yarn dev
