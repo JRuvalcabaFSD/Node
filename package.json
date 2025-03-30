@@ -10,9 +10,10 @@
     "dev": "ts-node-dev --poll --transpile-only --respawn --cls src/app.ts",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/app.js",
-    "test": "jest",
-    "test:watch": "CHOKIDAR_USEPOLLING=true jest --watchAll",
-    "test:coverage": "jest --coverage"
+    "test": "yarn docker:test && jest",
+    "test:watch": "yarn docker:test && CHOKIDAR_USEPOLLING=true jest --watchAll",
+    "test:coverage": "yarn docker:test && jest --coverage",
+    "docker:test": "docker compose -f docker-compose.test.yml --env-file .env.test up -d"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

@@ -12,9 +12,9 @@ const postgresSystemRepository = new LogRepositoryImpl(new PostGresLogDataSource
 export class Server {
   public static async start() {
     console.log('Sever started...');
-    CronService.createJob('*/5 * * * * *', () => {
-      const url = 'https://godddogle.com';
-      new CheckServiceMultiple([fileSystemRepository, mongoSystemRepository, postgresSystemRepository], undefined, undefined).execute(url);
-    });
+    // CronService.createJob('*/5 * * * * *', () => {
+    //   const url = 'https://godddogle.com';
+    //   new CheckServiceMultiple([fileSystemRepository, mongoSystemRepository, postgresSystemRepository], undefined, undefined).execute(url);
+    // });
   }
 }
