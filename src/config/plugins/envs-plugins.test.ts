@@ -4,7 +4,7 @@ describe('envs-prugins', () => {
     expect(envs).toEqual({
       PORT: 3000,
       MAILER_SERVICE: 'smtp.gmail.com',
-      MAILER_EMAIL: 'jruvalcabafsd@gmail.com',
+      MAILER_EMAIL: 'jruvalcaddddbafsd@gmail.com',
       MAILER_SECRET_KEY: 'mpswnkgdlgvgpzzl',
       PROD: false,
       MONGO_URL: 'mongodb://jesus:123456@localhost:27017',
