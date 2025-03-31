@@ -1,16 +1,14 @@
 import { createTransport } from 'nodemailer';
 import { envs } from '../../config/plugins/envs-plugins';
-import { LogRepository } from '../../domain/repository/log.repository';
-import { LogEntity, LogseverityLevel } from '../../domain/entities/log.entities';
 
-interface SendMailOptions {
+export interface SendMailOptions {
   to: string | string[];
   subject: string;
   htmlBody: string;
   attachments?: Attachment[];
 }
 
-interface Attachment {
+export interface Attachment {
   fileName: string;
   path: string;
 }
