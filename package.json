@@ -9,10 +9,12 @@
   "scripts": {
     "dev": "ts-node-dev --poll --transpile-only --respawn --cls src/app.ts",
     "build": "rimraf ./dist && tsc",
-    "start": "npm run build && node dist/app.js",
+    "start": "node dist/app.js",
     "test": "jest",
     "test:watch": "CHOKIDAR_USEPOLLING=true jest --watchAll",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "app:up":"docker compose up",
+    "app:down":"docker compose down"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
