@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: jruvalcabafsd/curso_node  # Especifica el nombre de la imagen con tu usuario de Docker Hub    
     ports:
       - "80:3000"
     environment:
