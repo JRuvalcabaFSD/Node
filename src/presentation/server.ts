@@ -1,34 +1,31 @@
-import express from 'express';
+import express, { Router } from 'express';
 import { join } from 'path';
 
 interface Options {
   port: number;
   public_path: string;
+  routes: Router;
 }
 
 export class Server {
   private app = express();
   private readonly port: number;
   private readonly public_path: string;
+  private readonly routes: Router;
 
-  constructor({ port, public_path }: Options) {
+  constructor({ port, public_path, routes }: Options) {
     this.port = port;
     this.public_path = public_path;
+    this.routes = routes;
   }
   async start() {
     //* Middlewares
 
-    //* Routes
-    this.app.get('/api/todos', (req, res) => {
-      res.json([
-        { id: 1, text: 'Buy milk', createdAt: new Date() },
-        { id: 2, text: 'Buy bread', createdAt: null },
-        { id: 3, text: 'Buy butter', createdAt: new Date() },
-      ]);
-    });
-
     //* Public folder
     this.app.use(express.static(this.public_path));
+
+    //* Routes
+    this.app.use(this.routes);
 
     //* SPA
     this.app.get(/(.*)/, (req, res) => {
