@@ -17,10 +17,20 @@ export class Server {
   }
   async start() {
     //* Middlewares
-    //* Public folder
 
+    //* Routes
+    this.app.get('/api/todos', (req, res) => {
+      res.json([
+        { id: 1, text: 'Buy milk', createdAt: new Date() },
+        { id: 2, text: 'Buy bread', createdAt: null },
+        { id: 3, text: 'Buy butter', createdAt: new Date() },
+      ]);
+    });
+
+    //* Public folder
     this.app.use(express.static(this.public_path));
 
+    //* SPA
     this.app.get(/(.*)/, (req, res) => {
       const indexPath = join(__dirname + `../../../${this.public_path}/index.html`);
       res.sendFile(indexPath);
