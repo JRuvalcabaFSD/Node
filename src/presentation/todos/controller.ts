@@ -56,4 +56,23 @@ export class TodosControler {
     completedAt === 'null' ? (todo.completedAt = null) : (todo.completedAt = new Date(completedAt || todo.completedAt));
     res.json(todo);
   };
+
+  public deleteTodo = (req: Request, res: Response) => {
+    const id = +req.params.id;
+    if (isNaN(id)) {
+      res.status(400).json({ error: 'ID argument is not a number' });
+      return;
+    }
+
+    const index = todos.findIndex((todo) => todo.id === id);
+    if (index < 0) {
+      res.status(400).json({ error: `TODO with id ${id} not found` });
+      return;
+    }
+
+    const deleteTodo = todos[index];
+
+    todos.splice(index, 1);
+    res.json({ msg: `Se elimino el elemento con el id ${id} correctamente`, todo: deleteTodo });
+  };
 }
