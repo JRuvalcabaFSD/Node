@@ -64,15 +64,13 @@ export class TodosControler {
       return;
     }
 
-    const index = todos.findIndex((todo) => todo.id === id);
-    if (index < 0) {
-      res.status(400).json({ error: `TODO with id ${id} not found` });
+    const todo = todos.find((todo) => todo.id === id);
+    if (!todo) {
+      res.status(404).json({ error: `TODO with id ${id} not found` });
       return;
     }
 
-    const deleteTodo = todos[index];
-
-    todos.splice(index, 1);
-    res.json({ msg: `Se elimino el elemento con el id ${id} correctamente`, todo: deleteTodo });
+    todos.splice(todos.indexOf(todo), 1);
+    res.json({ msg: `The element was eliminated with the ID ${id} correctly`, todo });
   };
 }
