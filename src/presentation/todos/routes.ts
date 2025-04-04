@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { TodosControler } from './controller';
+import { TodosController } from './controller';
 
 export class TodoRoutes {
   static get routes(): Router {
     const router = Router();
-    const todoController = new TodosControler();
+    const todoController = new TodosController();
 
     router.get('/', todoController.getTodos);
     router.get('/:id', todoController.getTodoById);
