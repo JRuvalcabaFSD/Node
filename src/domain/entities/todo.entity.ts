@@ -8,4 +8,18 @@ export class TodoEntity {
   get isCompleted() {
     return !!this.completedAt;
   }
+
+  public static fromObj(object: { [key: string]: any }): TodoEntity {
+    const { id, text, completedAt } = object;
+    if (!id) throw 'id is required';
+    if (!text) throw 'text is required';
+
+    let newCompletedAt;
+    if (completedAt) {
+      newCompletedAt = new Date(completedAt);
+      if (isNaN(newCompletedAt.getTime())) throw 'completedAt is not a valid date (yyyy-mm-dd)';
+    }
+
+    return new TodoEntity(id, text, completedAt);
+  }
 }
