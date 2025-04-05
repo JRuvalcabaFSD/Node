@@ -13,9 +13,11 @@
     "test": "jest",
     "test:watch": "CHOKIDAR_USEPOLLING=true jest --watchAll",
     "test:coverage": "jest --coverage",
-    "docker:build": "docker buildx build --no-cache --platform linux/amd64,linux/arm64/v8 -t jruvalcabafsd/curso_node --push .",
+    "docker:build:staging": "docker buildx build --no-cache --platform linux/amd64,linux/arm64/v8 --build-arg ENVFILE=staging.env -t jruvalcabafsd/curso_node .",
+    "docker:build:prod": "docker buildx build --no-cache --platform linux/amd64,linux/arm64/v8 --build-arg ENVFILE=prod.env -t jruvalcabafsd/curso_node .",
     "app:up": "docker compose up -d",
-    "app:down": "docker compose down"
+    "app:down": "docker compose down",
+    "prisma:migrate:prod":"prisma migrate deploy"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
