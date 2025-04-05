@@ -48,7 +48,102 @@ Esto significa que el código de las capas externas **puede depender** del de la
 
 ## Estructura de directorios
 
-<img src="./dirstructure.png" alt="dirstructure" style="zoom:67%;" />
+<img src="./mdfiles/dirstructure.png" alt="dirstructure" style="zoom:67%;" />
 
 
 
+### Explicación de las capas
+
+1. #### Domain
+
+   **Qué son:**
+    Interfaces que definen cómo se espera obtener los datos (por ejemplo, desde una base de datos, una API, etc.).
+
+   **Para qué se usan:**
+    Son contratos que luego serán implementados en capas como `infrastructure`.
+
+   **Ejemplo:**
+
+   <img src="./mdfiles/code1.png" alt="code1" style="zoom:70%;" />
+
+   > 🧠 *La capa domain no sabe si los datos vienen de PostgreSQL, Mongo, archivos o una API. Solo define el “qué”, no el “cómo”.*
+
+2. #### **DTOs (Data Transfer Objects)**
+
+   - **Qué son:**
+      Estructuras de datos puras que definen la forma en que se recibe o envía información.
+
+   - **Para qué se usan:**
+      Aportan **tipado fuerte**, validación y separación clara entre el modelo de negocio (`Entity`) y los datos que entran/salen.
+
+   - **Ejemplo:**
+
+     <img src="./mdfiles/code2.png" alt="code1" style="zoom:70%;" />
+
+   > 💡 *No contienen lógica de negocio, solo estructura y validación de datos.*
+
+3. **Entities**
+
+   - **Qué son:**
+      Representan el **modelo central del dominio**, con todas las reglas y propiedades que lo definen.
+
+   - **Para qué se usan:**
+      Contienen **reglas de negocio** internas que siempre deben cumplirse.
+
+   - **Ejemplo:**
+
+     <img src="./mdfiles/code3.png" alt="code1" style="zoom:70%;" />
+
+     
+
+     > 🔐 *Las entidades son independientes de cómo se guardan o se presentan los datos.*
+
+4. **Repositories**
+
+   - **Qué son:**
+      Interfaces que definen operaciones de alto nivel sobre entidades (CRUD, queries, etc.).
+
+   - **Para qué se usan:**
+     Desacoplan los **casos de uso** de la forma en que accedemos a los datos. Sirven como puente entre el dominio y la infraestructura.
+
+   - **Ejemplo:**
+
+     <img src="./mdfiles/code4.png" alt="code1" style="zoom:70%;" />
+
+     🧱 *Los repositorios trabajan con entidades, no con DTOs ni respuestas crudas de una base de datos.*
+
+5. **Use Cases (Casos de Uso)**
+
+   - **Qué son:**
+      Lógica específica de aplicación: define **qué se puede hacer** con el sistema.
+
+   - **Para qué se usan:**
+      Orquestan los pasos para cumplir una acción concreta (crear, obtener, actualizar, eliminar, etc.).
+
+   - **Ejemplo:**
+      El caso `CreateTodo` puede:
+
+     1. Validar el DTO.
+     2. Crear una entidad.
+     3. Llamar al repositorio para guardarla.
+     4. Devolver el resultado.
+
+     <img src="./mdfiles/code4.png" alt="code1" style="zoom:70%;" />
+
+     > > [!NOTE]
+     > >
+     > > 💼 *Los casos de uso no saben ni les importa cómo están implementados los repositorios.*
+
+6. #### 🎯 Resumen visual rápido:
+
+   DTOs           -> Definen los datos que entran/salen.
+   Entities       -> Modelo del dominio con reglas propias.
+   Repositories   -> Contrato para acceder a entidades.
+   Datasources    -> Contrato para la fuente de datos.
+   Use Cases      -> Aplican la lógica de negocio usando todo lo anterior.
+
+   
+
+   
+
+   
