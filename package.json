@@ -17,9 +17,10 @@
     "docker:build:prod": "docker buildx build --no-cache --platform linux/amd64,linux/arm64/v8 --build-arg ENVFILE=prod.env -t jruvalcabafsd/curso_node .",
     "app:up": "docker compose up -d",
     "app:down": "docker compose down",
-    "prisma:migrate":"prisma migrate deploy"
+    "prisma:migrate": "prisma migrate deploy"
   },
   "devDependencies": {
+    "@types/compression": "^1.7.5",
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.11",
@@ -40,6 +41,7 @@
   },
   "dependencies": {
     "@prisma/client": "6.5.0",
+    "compression": "^1.8.0",
     "dotenv": "^16.4.7",
     "env-var": "^7.5.0",
     "express": "^5.1.0"
