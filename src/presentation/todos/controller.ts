@@ -1,8 +1,16 @@
 import { Request, Response } from 'express';
-import { CreateDto, CreateTodo, DeleteTodo, GetTodo, GetTodos, TodoRepository, UpdateDto, UpdateTodo } from '../../domain';
+import { CreateDto, CreateTodo, CustomError, DeleteTodo, GetTodo, GetTodos, TodoRepository, UpdateDto, UpdateTodo } from '../../domain';
 
 export class TodosController {
   constructor(private readonly todoRepository: TodoRepository) {}
+
+  private handleError = (resp: Response, error: unknown) => {
+    if (error instanceof CustomError) {
+      return resp.status(error.statusCode).json({ error: error.message });
+    }
+
+    return resp.status(500).json({ error: 'Internal server error - check logs' });
+  };
 
   public getTodos = (req: Request, res: Response) => {
     new GetTodos(this.todoRepository)
@@ -16,7 +24,7 @@ export class TodosController {
     new GetTodo(this.todoRepository)
       .execute(id)
       .then((todos) => res.json(todos))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => this.handleError(res, error));
   };
 
   public createTodo = (req: Request, res: Response) => {
@@ -29,7 +37,7 @@ export class TodosController {
     new CreateTodo(this.todoRepository)
       .execute(todoData!)
       .then((todos) => res.status(201).json(todos))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => this.handleError(res, error));
   };
 
   public updateTodo = (req: Request, res: Response) => {
@@ -44,7 +52,7 @@ export class TodosController {
     new UpdateTodo(this.todoRepository)
       .execute(dataTodo!)
       .then((todos) => res.json(todos))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => this.handleError(res, error));
   };
 
   public deleteTodo = (req: Request, res: Response) => {
@@ -53,6 +61,6 @@ export class TodosController {
     new DeleteTodo(this.todoRepository)
       .execute(id)
       .then((todos) => res.json(todos))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => this.handleError(res, error));
   };
 }

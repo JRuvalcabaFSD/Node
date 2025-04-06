@@ -8,6 +8,7 @@ describe('todo route testing', () => {
 
   beforeAll(async () => {
     await testServer.start();
+    await prisma.todo.deleteMany();
   });
   afterAll(() => {
     testServer.close();
@@ -38,7 +39,7 @@ describe('todo route testing', () => {
 
   test('should return 404 not found a todo api/todo/id', async () => {
     const todoId = 999;
-    const { body } = await request(testServer.app).get(`/api/todos/${todoId}`).expect(400);
+    const { body } = await request(testServer.app).get(`/api/todos/${todoId}`).expect(404);
 
     expect(body).toEqual({ error: `Todo width id ${todoId} not found` });
   });
@@ -54,8 +55,52 @@ describe('todo route testing', () => {
 
     expect(body).toEqual({ error: expect.any(String) });
   });
+
   test('should return a error if text empty api/todos', async () => {
     const { body } = await request(testServer.app).post(`/api/todos`).send({ text: '' }).expect(400);
+
+    expect(body).toEqual({ error: expect.any(String) });
+  });
+
+  test('should return a update todo api/todos/:id', async () => {
+    const { id } = await prisma.todo.create({ data: todo1 });
+    const updateObj = { text: 'hola mundo Update', completedAt: '1981-12-24' };
+
+    const { body } = await request(testServer.app).put(`/api/todos/${id}`).send(updateObj).expect(200);
+
+    expect(body).toEqual({ id, text: updateObj.text, completedAt: '1981-12-24T00:00:00.000Z' });
+  });
+
+  test('should return 404 if TODO not found', async () => {
+    const id = 9999;
+    const { body } = await request(testServer.app).put(`/api/todos/${id}`).send({ text: 'hola mundo Update', completedAt: '1981-12-24' }).expect(404);
+    expect(body).toEqual({ error: expect.any(String) });
+  });
+
+  test('should return an updated TODO only date should be update', async () => {
+    const { id, text } = await prisma.todo.create({ data: todo1 });
+    const updateObj = { completedAt: '1981-12-24' };
+    const { body } = await request(testServer.app).put(`/api/todos/${id}`).send(updateObj).expect(200);
+
+    expect(body).toEqual({ id, text, completedAt: '1981-12-24T00:00:00.000Z' });
+  });
+
+  test('should return an updated TODO only text should be update', async () => {
+    const { id, completedAt } = await prisma.todo.create({ data: todo1 });
+    const updateObj = { text: '1981-12-24' };
+    const { body } = await request(testServer.app).put(`/api/todos/${id}`).send(updateObj).expect(200);
+
+    expect(body).toEqual({ id, text: updateObj.text, completedAt });
+  });
+
+  test('should delete a todo api/todos/:id', async () => {
+    const { id } = await prisma.todo.create({ data: todo1 });
+    const { body } = await request(testServer.app).delete(`/api/todos/${id}`).expect(200);
+    expect(body).toEqual({ id, text: todo1.text, completedAt: null });
+  });
+  test('should return 404 if todo not exist api/todos/:id', async () => {
+    const id = 9999;
+    const { body } = await request(testServer.app).delete(`/api/todos/${id}`).expect(404);
 
     expect(body).toEqual({ error: expect.any(String) });
   });
