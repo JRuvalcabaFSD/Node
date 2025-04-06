@@ -54,7 +54,7 @@ Esto significa que el código de las capas externas **puede depender** del de la
 
 ### Explicación de las capas
 
-1. #### Domain
+1. #### Datasources
 
    **Qué son:**
     Interfaces que definen cómo se espera obtener los datos (por ejemplo, desde una base de datos, una API, etc.).
@@ -110,7 +110,7 @@ Esto significa que el código de las capas externas **puede depender** del de la
 
      <img src="./mdfiles/code4.png" alt="code1" style="zoom:70%;" />
 
-     🧱 *Los repositorios trabajan con entidades, no con DTOs ni respuestas crudas de una base de datos.*
+     > 🧱 *Los repositorios trabajan con entidades, no con DTOs ni respuestas crudas de una base de datos.*
 
 5. **Use Cases (Casos de Uso)**
 
@@ -128,22 +128,24 @@ Esto significa que el código de las capas externas **puede depender** del de la
      3. Llamar al repositorio para guardarla.
      4. Devolver el resultado.
 
-     <img src="./mdfiles/code4.png" alt="code1" style="zoom:70%;" />
+     <img src="./mdfiles/code5.png" alt="code1" style="zoom:70%;" />
 
-     > > [!NOTE]
-     > >
-     > > 💼 *Los casos de uso no saben ni les importa cómo están implementados los repositorios.*
-
+     > 💼 *Los casos de uso no saben ni les importa cómo están implementados los repositorios.*
+   
 6. #### 🎯 Resumen visual rápido:
 
    DTOs           -> Definen los datos que entran/salen.
+   
    Entities       -> Modelo del dominio con reglas propias.
+   
    Repositories   -> Contrato para acceder a entidades.
+
    Datasources    -> Contrato para la fuente de datos.
+
    Use Cases      -> Aplican la lógica de negocio usando todo lo anterior.
 
    
-
    
-
+   
+   
    
