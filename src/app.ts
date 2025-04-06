@@ -8,7 +8,7 @@ import { AppServer } from './presentation/server';
 })();
 
 async function main() {
-  await MongoDatabase.connect({ mongoUrl: envs.MONGO_URL, dbName: envs.MONGO_URL });
+  await MongoDatabase.connect({ mongoUrl: envs.MONGO_URL, dbName: envs.MONGO_DB_NAME });
   const server = new AppServer({
     port: envs.PORT,
     routes: AppRoutes.routes,
