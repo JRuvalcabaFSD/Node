@@ -14,7 +14,7 @@ export class CreateDto {
 
     const { text } = props;
 
-    if (!text) return [{ httpCode: 400, message: 'Text property is required' }];
+    if (!text || text.length === 0) return [{ httpCode: 400, message: 'Text property is required' }];
 
     return [undefined, new CreateDto(text)];
   }
