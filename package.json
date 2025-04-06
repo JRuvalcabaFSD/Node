@@ -11,7 +11,7 @@
     "build": "rimraf ./dist && tsc",
     "start": "node dist/app.js",
     "test": "yarn migrate:db:test && jest",
-    "test:watch": "yarn migrate:db:test && CHOKIDAR_USEPOLLING=true jest --watchAll",
+    "test:watch": "yarn migrate:db:test && CHOKIDAR_USEPOLLING=true jest --watch",
     "test:coverage": "jest --coverage",
     "docker:build:staging": "docker buildx build --no-cache --platform linux/amd64,linux/arm64/v8 --build-arg ENVFILE=staging.env -t jruvalcabafsd/curso_node .",
     "docker:build:prod": "docker buildx build --no-cache --platform linux/amd64,linux/arm64/v8 --build-arg ENVFILE=prod.env -t jruvalcabafsd/curso_node .",
