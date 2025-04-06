@@ -1,6 +1,6 @@
 import { BcryptAdapter } from '../../config';
 import { UserModel } from '../../data';
-import { CustomError, RegisterUserDto, UserEntity } from '../../domain';
+import { CustomError, LoginUserDto, RegisterUserDto, UserEntity } from '../../domain';
 
 export class AuthService {
   constructor() {}
@@ -19,5 +19,17 @@ export class AuthService {
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
+  }
+
+  public async loginUser(loginUserDto: LoginUserDto) {
+    let credentialValid = false;
+
+    const findUser = await UserModel.findOne({ email: loginUserDto.email });
+    if (!findUser) throw CustomError.unAuthorized('Invalid credentials');
+    credentialValid = BcryptAdapter.validate(loginUserDto.password, findUser.password);
+
+    if (!credentialValid) throw CustomError.unAuthorized('Invalid credentials');
+    const { password, ...user } = UserEntity.fromObject(findUser);
+    return { user, token: 'ABC' };
   }
 }
