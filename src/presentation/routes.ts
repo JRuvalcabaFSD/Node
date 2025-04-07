@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { AuthRoutes } from './auth/routes.auth';
-import { CategoryRoutes } from './categoryes/routes.category';
+import { CategoryRoutes } from './categories/routes.category';
 
 export class AppRoutes {
   static get routes(): Router {
