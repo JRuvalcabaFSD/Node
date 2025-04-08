@@ -35,7 +35,7 @@ export class EmailService {
     try {
       const sendInformation = await this.transporter.sendMail({ to, subject, html: htmlBody, attachments });
       return true;
-    } catch (error) {
+    } catch (error) {      
       return false;
     }
   }

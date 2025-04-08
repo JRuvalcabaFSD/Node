@@ -44,7 +44,7 @@ export class AuthService {
   private sendEmailValidation = async (email: string) => {
     const token = await JwtAdapter.generateToken({ email });
     if (!token) throw CustomError.internalServer('Error getting token');
-    const link = `${envs.WEBSERVER_URL}auth/validate-email/${token}`;
+    const link = `${envs.WEBSERVER_URL}api/auth/validate-email/${token}`;
     const html = `
       <h1>Validate your email</h1>
       <p>Click n the following link to validate your email</p>

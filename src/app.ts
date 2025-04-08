@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { envs } from './config/envs';
 import { MongoDatabase } from './data';
 import { AppRoutes } from './presentation/routes';
@@ -12,7 +13,8 @@ async function main() {
   const server = new AppServer({
     port: envs.PORT,
     routes: AppRoutes.routes,
-  });
+  }); 
+  
 
   server.start();
 }
