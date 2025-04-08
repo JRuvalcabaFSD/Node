@@ -31,7 +31,6 @@ export class AuthMiddleware {
       req.body.user = UserEntity.fromObject(user);
       next();
     } catch (error) {
-      console.log(error);
       res.status(500).json({ error: 'Internal server error' });
     }
   }
