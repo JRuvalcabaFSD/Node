@@ -37,11 +37,15 @@ export class CategoryService {
 
     totalPages = Math.ceil(totalItems / limit);
 
-    if (page > totalPages && totalItems > 0) throw CustomError.badRequest('Out of rank page');
-
     const categories = await CategoryModel.find().skip(skip).limit(limit);
     const next = page + 1 <= totalPages ? `${envs.WEBSERVER_URL}api/category?page=${page + 1}&limit=${limit}` : null;
     const prev = page - 1 > 0 ? `${envs.WEBSERVER_URL}api/category?page=${page - 1}&limit=${limit}` : null;
+
+    if (page > totalPages && totalItems > 0)
+      return {
+        error: 'Page out of range',
+        firstPage: `${envs.WEBSERVER_URL}api/category?page=1&limit=${limit}`,
+      };
 
     return { page, limit, totalPages, next, prev, categories };
   }

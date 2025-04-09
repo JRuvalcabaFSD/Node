@@ -17,6 +17,9 @@ export class AuthMiddleware {
     }
 
     const token = authorization.split(' ').at(-1) || '';
+
+    if (!req.body) req.body = {};
+
     try {
       const payload = await JwtAdapter.validateToken<{ id: string }>(token);
       if (!payload) {
@@ -28,7 +31,9 @@ export class AuthMiddleware {
         res.status(401).json({ error: 'Invalid token - user' });
         return;
       }
-      req.body.user = UserEntity.fromObject(user);
+      const newUser = UserEntity.fromObject(user);
+
+      req.body.user = newUser;
       next();
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
