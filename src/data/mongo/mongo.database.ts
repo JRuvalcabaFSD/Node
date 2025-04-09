@@ -15,7 +15,10 @@ export class MongoDatabase {
     } catch (error) {
       console.log('Mongo connection error.');
       throw error;
-      return false;
     }
+  }
+
+  static async disconnect() {
+    await mongoose.disconnect();
   }
 }

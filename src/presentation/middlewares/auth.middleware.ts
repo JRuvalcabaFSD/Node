@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { JwtAdapter } from '../../config';
-import { UserModel } from '../../data';
 import { UserEntity } from '../../domain';
+import { UserModel } from '../../data';
 
 export class AuthMiddleware {
   static async validateJwt(req: Request, res: Response, next: NextFunction) {

@@ -1,4 +1,3 @@
-import { join } from 'path';
 import { envs } from './config/envs';
 import { MongoDatabase } from './data';
 import { AppRoutes } from './presentation/app.routes';
