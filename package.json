@@ -13,11 +13,12 @@
     "test": "jest",
     "test:watch": "CHOKIDAR_USEPOLLING=true jest --watch",
     "test:coverage": "jest --coverage",
-    "seed":"ts-node-dev src/data/seed/seed.ts"
+    "seed": "ts-node-dev src/data/seed/seed.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.1",
+    "@types/express-fileupload": "^1.5.1",
     "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.11",
@@ -41,8 +42,10 @@
     "dotenv": "^16.4.7",
     "env-var": "^7.5.0",
     "express": "^5.1.0",
+    "express-fileupload": "^1.5.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.2",
-    "nodemailer": "^6.10.0"
+    "nodemailer": "^6.10.0",
+    "uuid": "^11.1.0"
   }
 }

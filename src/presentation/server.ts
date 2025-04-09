@@ -1,6 +1,7 @@
-import express, { Application, Request, Response, Router } from 'express';
-import { Server } from 'http';
 import { join } from 'path';
+import { Server } from 'http';
+import express, { Application, Request, Response, Router } from 'express';
+import fileUpload from 'express-fileupload';
 
 interface Options {
   port: number;
@@ -26,6 +27,7 @@ export class AppServer {
     //*Middlewares
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(fileUpload({ limits: { fileSize: 50 * 1024 * 1024 } }));
 
     //*Public folder
     this.app.use(express.static(this.publicPath));
@@ -34,8 +36,7 @@ export class AppServer {
     this.app.use(this.routes);
 
     //* SPA /^\/(?!api).*/  <== Únicamente si no empieza con la palabra api
-    this.app.get(/^\/(?!api).*/, (req: Request, res: Response) => {     
-    
+    this.app.get(/^\/(?!api).*/, (req: Request, res: Response) => {
       const indexPath = join(__dirname, '../../../${ this.publicPath }/index.html');
       res.sendFile(indexPath);
     });
