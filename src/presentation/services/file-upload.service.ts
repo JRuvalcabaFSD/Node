@@ -11,8 +11,6 @@ export class FileUploadService {
     if (!existsSync(folderPath)) mkdirSync(folderPath);
   }
 
-  public async uploadMultiple(file: any[], folder: string = 'uploads', validExtensions: string[] = ['png', 'jpg', 'jpeg', 'gif']) {}
-
   public async uploadSimple(file: UploadedFile, folder: string = 'uploads', validExtensions: string[] = ['png', 'jpg', 'jpeg', 'gif']) {
     try {
       const fileExtension = file.mimetype.split('/').at(1) ?? '';
@@ -28,5 +26,10 @@ export class FileUploadService {
       console.log(error);
       throw error;
     }
+  }
+  public async uploadMultiple(files: UploadedFile[], folder: string = 'uploads', validExtensions: string[] = ['png', 'jpg', 'jpeg', 'gif']) {
+    const fileNames = await Promise.all(files.map((file) => this.uploadSimple(file, folder, validExtensions)));
+
+    return fileNames;
   }
 }
