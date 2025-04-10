@@ -6,3 +6,4 @@ ouputs/
 coverage/
 *.env
 .vscode/
+/uploads
