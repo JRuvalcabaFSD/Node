@@ -39,6 +39,18 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@netlify/functions@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-3.0.4.tgz#0668f0cb5995948624f8f597c29b4bcf0b1eb7fc"
+  integrity sha512-Ox8+ABI+nsLK+c4/oC5dpquXuEIjzfTlJrdQKgQijCsDQoje7inXFAtKDLvvaGvuvE+PVpMLwQcIUL6P9Ob1hQ==
+  dependencies:
+    "@netlify/serverless-functions-api" "1.36.0"
+
+"@netlify/serverless-functions-api@1.36.0":
+  version "1.36.0"
+  resolved "https://registry.yarnpkg.com/@netlify/serverless-functions-api/-/serverless-functions-api-1.36.0.tgz#e7e9ce83d059c4c845440ec861a7e69c0d800bfa"
+  integrity sha512-z6okREyK8in0486a22Oro0k+YsuyEjDXJt46FpgeOgXqKJ9ElM8QPll0iuLBkpbH33ENiNbIPLd1cuClRQnhiw==
+
 "@tsconfig/node10@^1.0.7":
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/@tsconfig/node10/-/node10-1.0.11.tgz#6ee46400685f130e278128c7b38b7e031ff5b2f2"
