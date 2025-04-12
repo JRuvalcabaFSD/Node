@@ -1,8 +1,30 @@
+# Node
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# TypeScript
 dist/
-*.log
-.DS_Store
-ouputs/
-coverage/
+*.tsbuildinfo
+
+# Logs
 logs/
-*.env
+*.log
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# VSCode
+.vscode/
+
+# Env files
+.env
+
+# Coverage
+coverage/
