@@ -3,7 +3,6 @@ import { join } from 'path';
 
 interface Options {
   port: number;
-  routes: Router;
   publicPath?: string;
 }
 
@@ -11,13 +10,11 @@ export class Server {
   public readonly app: Application = express();
   private readonly port: number;
   private readonly publicPath?: string;
-  private readonly routes: Router;
   private serverListener?: any;
 
   constructor(options: Options) {
-    const { port, routes, publicPath = 'public' } = options;
+    const { port, publicPath = 'public' } = options;
     this.port = port;
-    this.routes = routes;
     this.publicPath = publicPath;
     this.configure();
   }
@@ -30,9 +27,6 @@ export class Server {
     //Public folder
     this.app.use(express.static(this.publicPath!));
 
-    //Routes
-    this.app.use(this.routes);
-
     //SPA
     this.app.get(/^\/(?!api).*/, (req: Request, res: Response) => {
       const indexPath = join(
@@ -41,6 +35,10 @@ export class Server {
       );
       res.sendFile(indexPath);
     });
+  }
+
+  public setRoutes(router: Router) {
+    this.app.use(router);
   }
 
   async start() {
