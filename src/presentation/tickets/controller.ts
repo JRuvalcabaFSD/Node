@@ -1,27 +1,30 @@
 import { Request, Response } from 'express';
+import { TicketService } from '../services/ticket.service';
 
 export class TicketController {
-  constructor() {}
+  constructor(private readonly ticketService = new TicketService()) {}
 
   public getTickets = async (req: Request, res: Response) => {
-    res.json('getTickets');
+    res.json(this.ticketService.tickets);
   };
   public getLastTicketNumber = async (req: Request, res: Response) => {
-    res.json('getLastTicketNumber');
+    res.json(this.getLastTicketNumber);
   };
   public pendingTickets = async (req: Request, res: Response) => {
-    res.json('pendingTickets');
+    res.json(this.ticketService.pendingTickets);
   };
   public createTicket = async (req: Request, res: Response) => {
-    res.json('createTicket');
+    res.status(201).json(this.ticketService.createTicket());
   };
   public drawTicket = async (req: Request, res: Response) => {
-    res.json('drawTicket');
+    const { desk } = req.params;
+    res.json(this.ticketService.drawTicket(desk));
   };
   public doneTicket = async (req: Request, res: Response) => {
-    res.json('doneTicket');
+    const { ticketId } = req.params;
+    res.json(this.ticketService.onFinishTicket(ticketId));
   };
   public workingOn = async (req: Request, res: Response) => {
-    res.json('workingOn');
+    res.json(this.ticketService.lastWorkingOnTickets);
   };
 }
