@@ -6,7 +6,7 @@
   "author": "Jesus Ruvalcaba <jruvalcabafsd@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --clear src/app.ts",
     "build": "yarn format && yarn lint:fix && rimraf dist && tsc",
     "start": "node dist/index.js",
     "lint": "eslint 'src/**/*.{ts,js}'",
@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
+    "@types/ws": "^8.18.1",
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "eslint": "^9.24.0",
@@ -31,6 +32,7 @@
   "dependencies": {
     "dotenv": "^16.5.0",
     "env-var": "^7.5.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "wss": "^3.3.4"
   }
 }

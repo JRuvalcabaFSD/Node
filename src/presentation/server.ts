@@ -8,7 +8,7 @@ interface Options {
 }
 
 export class Server {
-  private readonly app: Application = express();
+  public readonly app: Application = express();
   private readonly port: number;
   private readonly publicPath?: string;
   private readonly routes: Router;
@@ -19,9 +19,10 @@ export class Server {
     this.port = port;
     this.routes = routes;
     this.publicPath = publicPath;
+    this.configure();
   }
 
-  async start() {
+  private configure() {
     //Middlewares
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
@@ -40,7 +41,9 @@ export class Server {
       );
       res.sendFile(indexPath);
     });
+  }
 
+  async start() {
     this.serverListener = this.app.listen(this.port, () => {
       console.log(`Server running in port ${this.port}`);
     });
